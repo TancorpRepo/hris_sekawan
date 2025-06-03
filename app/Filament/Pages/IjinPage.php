@@ -81,7 +81,7 @@ class IjinPage extends Page implements HasForms
                     ->label('Longitude')
                     ->required()
                     ->hidden(),
-                DatePicker::make('CurrentDateTime')
+                DatePicker::make('jam')
                     ->label('Tanggal Off')
                     ->timezone('Asia/Jakarta')
                     ->displayFormat('YYYY-MM-DD')
@@ -96,7 +96,7 @@ class IjinPage extends Page implements HasForms
     public function submit()
     {
         $data = $this->form->getState();
-        // $data['CurrentDateTime'] = now();
+        // $data['jam'] = now();
 
         //Validasi
         $employee = Employee::whereRaw('BINARY PersonnelNo = ?', $data['PersonnelNo'])->first();

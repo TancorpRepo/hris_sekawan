@@ -48,7 +48,7 @@ class Ijin extends Page implements HasTable
             ])
             ->columns([
                 TextColumn::make('PersonnelNo')->label('nik'),
-                TextColumn::make('CurrentDateTime')->label('Tanggal'),
+                TextColumn::make('jam')->label('Tanggal'),
                 TextColumn::make('Keterangan')->label('Keterangan'),
             ])
             ->filters([])

@@ -37,7 +37,7 @@
 
         <input type="hidden" id="data.Latitude" name="Latitude" value="">
         <input type="hidden" id="data.Longitude" name="Longitude" value="">
-        <input type="hidden" id="data.CurrentDateTime" name="CurrentDateTime" value="">
+        <input type="hidden" id="data.jam" name="jam" value="">
 
         <x-filament::button type="submit" size="sm" class="my-4" :disabled="!$nikValid">
             Submit
@@ -57,9 +57,9 @@
                 document.querySelector("[wire\\:model='data.Longitude']").dispatchEvent(new Event('input'));
 
                 var currentDate = new Date().toLocaleDateString("en-CA"); // Format ISO (YYYY-MM-DD)
-                document.querySelector("[wire\\:model='data.CurrentDateTime']").value = currentDate;
+                document.querySelector("[wire\\:model='data.jam']").value = currentDate;
 
-                document.querySelector("[wire\\:model='data.CurrentDateTime']").dispatchEvent(new Event('input'));
+                document.querySelector("[wire\\:model='data.jam']").dispatchEvent(new Event('input'));
             });
         }
 

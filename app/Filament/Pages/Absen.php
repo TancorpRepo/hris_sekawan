@@ -48,25 +48,26 @@ class Absen extends Page implements HasTable
 
     public function getTableRecordKey($record): string
     {
-        $key = $record->PersonnelNo; // Atau kolom yang sesuai
+        $loginAdmin = auth()->user()->is_admin;
 
-        if ($key === null) {
-            // Tangani kasus ketika key tidak ada, misalnya dengan menghasilkan ID default atau error
-            throw new \Exception('Record key is null');
+        if ($loginAdmin == '1') {
+            return (string) ($record->nik ?? $record->id ?? throw new \Exception('Record key is null'));
         }
 
-        return (string) $key;
+        // Untuk non-admin (hasil query agregat), pakai tanggal sebagai key
+        return (string) ($record->tanggal ?? throw new \Exception('Record key is null'));
     }
 
     //! Belum ada filter tanggal awal & tanggal akhir
     public function table(Table $table)
     {
+        // $loginUser = auth()->user()->PersonnelNo;
         $loginUser = auth()->user()->PersonnelNo;
         $loginAdmin = auth()->user()->is_admin;
 
         // Admin(12345)
         if ($loginAdmin == '1') {
-            return $table->query(Attendance::query()->orderBy('CurrentDateTime', 'DESC'))
+            return $table->query(Attendance::query()->orderBy('jam', 'DESC'))
                 ->headerActions([
                     Action::make('absensi')
                         ->label('Absensi')
@@ -79,38 +80,55 @@ class Absen extends Page implements HasTable
                     //     ->label('Export Absensi')
                     //     ->exporter(AbsenExporter::class),
                     ExportAction::make()
-                    ->label('Export Absensi')
-                    ->form([
-                        DatePicker::make('start_date')
-                        ->label('Tanggal Awal')
-                        ->required(),
-                        DatePicker::make('end_date')
-                        ->label('Tanggal Akhir')
-                        ->required(),
-                    ])
-                    ->action(function (array $data) {
-                        $start_date = $data['start_date'];
-                        $end_date = $data['end_date'];
+                        ->label('Export Absensi')
+                        ->form([
+                            DatePicker::make('start_date')
+                                ->label('Tanggal Awal')
+                                ->required(),
+                            DatePicker::make('end_date')
+                                ->label('Tanggal Akhir')
+                                ->required(),
+                        ])
+                        ->action(function (array $data) {
+                            $start_date = $data['start_date'];
+                            $end_date = $data['end_date'];
 
-                        return AbsenExporter::exportWithDateRange($start_date, $end_date);
-                    })
+                            return AbsenExporter::exportWithDateRange($start_date, $end_date);
+                        })
                 ])
                 ->columns([
-                    TextColumn::make('PersonnelNo')->label('NIK'),
-                    TextColumn::make('CurrentDateTime')->label('Tanggal & Jam'),
-                    TextColumn::make('CheckType')->label('in/out'),
+                    TextColumn::make('nik')->label('NIK'),
+                    TextColumn::make('jam')->label('Tanggal & Jam'),
+                    // TextColumn::make('status')->label('in/out'),
+                    TextColumn::make('status')
+                        ->label('Masuk/Pulang')
+                        ->badge()
+                        ->color(fn($state) => match ($state) {
+                            '1' => 'success',
+                            '2' => 'warning',
+                            default => 'gray',
+                        })
+                        ->formatStateUsing(fn($state) => match ($state) {
+                            '1' => 'Masuk',
+                            '2' => 'Pulang',
+                            // default => 'Unknown',
+                        }),
                 ])
                 ->filters([])
                 ->bulkActions([]);
         }
 
         return $table
-            ->query(Attendance::query()
-                // ->where('PersonnelNo', auth()->user()->PersonnelNo)
-                ->where('PersonnelNo', $loginUser)
-                ->orderBy('CurrentDateTime', 'DESC'))
-
-            // ->headerActionsPosition('start')
+            ->query(
+                Attendance::selectRaw('
+                DATE(jam) as tanggal,
+                MIN(CASE WHEN status = 1 THEN TIME(jam) END) as jam_masuk,
+                MIN(CASE WHEN status = 2 THEN TIME(jam) END) as jam_pulang
+            ')
+                    ->where('nik', $loginUser)
+                    ->groupByRaw('DATE(jam)')
+                    ->orderByRaw('DATE(jam) DESC')
+            )
             ->headerActions([
                 Action::make('absensi')
                     ->label('Absensi')
@@ -119,13 +137,13 @@ class Absen extends Page implements HasTable
                     })
                     ->icon('heroicon-m-pencil-square')
                     ->iconPosition(IconPosition::After),
-                // ExportAction::make()->label('Export Absensi')->exporter(AbsenExporter::class),
             ])
-
             ->columns([
-                TextColumn::make('PersonnelNo')->label('nik'),
-                TextColumn::make('CurrentDateTime')->label('Tanggal & Jam'),
-                TextColumn::make('CheckType')->label('in/out'),
+                TextColumn::make('tanggal')->label('Tanggal'),
+                TextColumn::make('jam_masuk')->label('Jam Masuk'),
+                TextColumn::make('jam_pulang')
+                    ->label('Jam Pulang')
+                    ->formatStateUsing(fn($state) => $state ?? '-'),
             ])
             ->filters([])
             ->bulkActions([]);

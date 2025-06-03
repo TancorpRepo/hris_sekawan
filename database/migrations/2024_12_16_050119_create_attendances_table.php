@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->text('PersonnelNo');
-            $table->dateTime('CurrentDateTime');
-            $table->text('CheckType');
+            $table->dateTime('jam');
+            $table->text('status');
             $table->text('idTR')->nullable();
             $table->text('Verify')->nullable();
             $table->text('SN')->nullable();

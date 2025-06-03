@@ -33,8 +33,9 @@ class PenggantiExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('PersonnelNo')->label('nik'),
-            ExportColumn::make('CurrentDateTime')->label('Tanggal'),
+            // ExportColumn::make('PersonnelNo')->label('nik'),
+            ExportColumn::make('nik')->label('nik'),
+            ExportColumn::make('jam')->label('Tanggal'),
             ExportColumn::make('Keterangan')->label('Keterangan'),
         ];
     }
@@ -43,7 +44,7 @@ class PenggantiExporter extends Exporter
     {
         $columns = self::getColumns();
 
-        // Sorting the data by 'CurrentDateTime' in descending order
+        // Sorting the data by 'jam' in descending order
         $exportedData = $this->data->sortByDesc('created_at')->map(function ($row) use ($columns) {
             return collect($columns)->mapWithKeys(function ($column) use ($row) {
                 $columnName = $column->getName();

@@ -7,7 +7,7 @@
 
         <br />
 
-        <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="data.PersonnelNo">
+        {{-- <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="data.PersonnelNo">
             <span class="text-sm font-medium leading-6 text-gray-950 dark:text-white">
                 Masukkan NIK<sup class="text-danger-600 dark:text-danger-400 font-medium">*</sup>
             </span>
@@ -20,9 +20,14 @@
                 placeholder:text-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-primary-500
                 disabled:text-gray-500 sm:text-sm sm:leading-6 bg-white ps-3 pe-3">
         </div>
-        <input type="hidden" wire:model.lazy="data.PersonnelNo">
+        <input type="hidden" wire:model.lazy="data.PersonnelNo"> --}}
+        <div class="text-sm text-gray-700">
+            <span class="font-semibold">NIK:</span> {{ auth()->user()->PersonnelNo }}
+        </div>
 
-        @if (!$nikValid && !empty($data['PersonnelNo']))
+        <input type="hidden" wire:model="data.PersonnelNo">
+
+        {{-- @if (!$nikValid && !empty($data['PersonnelNo']))
             <sup class="text-danger-600 dark:text-danger-400 font-medium">
                 <div class="text-red-500 text-sm mt-2">
                     @if ($data['PersonnelNo'] !== auth()->user()->PersonnelNo)
@@ -32,15 +37,15 @@
                     @endif
                 </div>
             </sup>
-        @endif
+        @endif --}}
 
         {{-- Form Fields --}}
         {{ $this->form }}
 
-        {{-- Latitude, Longitude, dan CurrentDateTime --}}
+        {{-- Latitude, Longitude, dan jam --}}
         <input type="hidden" id="data.Latitude" name="Latitude" value="">
         <input type="hidden" id="data.Longitude" name="Longitude" value="">
-        <input type="hidden" id="data.CurrentDateTime" name="CurrentDateTime" value="">
+        <input type="hidden" id="data.jam" name="jam" value="">
 
         {{-- Submit Button --}}
         <x-filament::button type="submit" size="sm" class="my-4" :disabled="!$nikValid">
@@ -53,7 +58,7 @@
             navigator.geolocation.getCurrentPosition(function(location) {
                 let latInput = document.getElementById("data.Latitude");
                 let longInput = document.getElementById("data.Longitude");
-                let timeInput = document.getElementById("data.CurrentDateTime");
+                let timeInput = document.getElementById("data.jam");
 
                 if (latInput && longInput && timeInput) {
                     latInput.value = location.coords.latitude;
@@ -73,7 +78,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
                     const inputNIK = document.querySelector('input[name="PersonnelNo"]');
                     const datalist = document.getElementById('nik-suggestions');
@@ -98,6 +103,6 @@
                     });
     </script>
 
-    <datalist id="nik-suggestions"></datalist>
+    <datalist id="nik-suggestions"></datalist> --}}
 
 </x-filament::page>

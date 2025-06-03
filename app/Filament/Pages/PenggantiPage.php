@@ -72,7 +72,7 @@ class PenggantiPage extends Page implements HasForms
                     ->label('Longitude')
                     ->required()
                     ->hidden(),
-                DatePicker::make('CurrentDateTime')
+                DatePicker::make('jam')
                     ->label('Tanggal Off')
                     ->timezone('Asia/Jakarta')
                     ->displayFormat('YYYY-MM-DD')

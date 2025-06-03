@@ -15,7 +15,7 @@ class Ijin extends Model
 
     protected $fillable = [
         'PersonnelNo',
-        'CurrentDateTime',
+        'jam',
         'idTR',
         'Verify',
         'SN',

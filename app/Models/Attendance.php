@@ -9,17 +9,16 @@ class Attendance extends Model
 {
     public $timestamps = false;
 
-    protected $table = 'tbl_attendances';
+    protected $table = 'tbl_absen';
 
     protected $fillable = [
-        'PersonnelNo',
-        'CurrentDateTime',
-        'CheckType',
-        'idTR',
-        'Verify',
-        'SN',
-        'Longitude',
-        'Latitude',
-        'IP',
+        'tgl_tarik',
+        'tanggal',
+        'mesin',
+        'nik', // PersonnelNo
+        'jam', // jam
+        'status', // 1 atau 2. 1 in 2 out
+        'f_export', // 2
+        'idplant', // 1
     ];
 }

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ijins', function (Blueprint $table) {
+        Schema::create('tbl_ijins', function (Blueprint $table) {
             $table->id();
             $table->text('PersonnelNo');
-            $table->date('CurrentDateTime');
+            $table->date('jam');
             $table->text('idTR')->nullable();
             $table->text('Verify')->nullable();
             $table->text('SN')->nullable();

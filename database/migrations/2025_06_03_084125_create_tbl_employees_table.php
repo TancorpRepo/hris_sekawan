@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tbl_ijins', function (Blueprint $table) {
-            $table->longText('Keterangan');
+        Schema::create('tbl_employees', function (Blueprint $table) {
+            $table->id();
+            $table->string('PersonnelNo')->nullable();
+            $table->string('Name')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ijins', function (Blueprint $table) {
-            $table->dropColumn('Keterangan');
-        });
+        Schema::dropIfExists('tbl_employees');
     }
 };

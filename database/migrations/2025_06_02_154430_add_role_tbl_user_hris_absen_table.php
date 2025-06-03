@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tbl_ijins', function (Blueprint $table) {
-            $table->longText('Keterangan');
+        Schema::table('tbl_user_hris_absen', function (Blueprint $table) {
+            $table->integer('is_admin')->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ijins', function (Blueprint $table) {
-            $table->dropColumn('Keterangan');
+        Schema::table('tbl_user_hris_absen', function (Blueprint $table) {
+            $table->dropColumn('is_admin');
         });
     }
 };

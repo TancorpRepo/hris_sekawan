@@ -29,8 +29,8 @@ class Employee extends Page implements HasTable
         ->query(Attendance::query())
         ->columns([
             TextColumn::make('PersonnelNo')->label('nik'),
-            TextColumn::make('CurrentDateTime')->label('Tanggal & Jam'),
-            TextColumn::make('CheckType')->label('in/out'),
+            TextColumn::make('jam')->label('Tanggal & Jam'),
+            TextColumn::make('status')->label('in/out'),
         ])
         ->filters([])
         ->actions([])

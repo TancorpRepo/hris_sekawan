@@ -31,9 +31,10 @@ class AbsenExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('PersonnelNo')->label('nik'),
-            ExportColumn::make('CurrentDateTime')->label('Tanggal & Jam'),
-            ExportColumn::make('CheckType')->label('in / out'),
+            // ExportColumn::make('PersonnelNo')->label('nik'),
+            ExportColumn::make('nik')->label('nik'),
+            ExportColumn::make('jam')->label('Tanggal & Jam'),
+            ExportColumn::make('status')->label('in / out'),
         ];
     }
 
@@ -41,8 +42,8 @@ class AbsenExporter extends Exporter
     {
         $columns = self::getColumns();
 
-        // Sorting data by 'CurrentDateTime' DESC
-        $exportedData = $this->data->sortByDesc('CurrentDateTime')->map(function ($row) use ($columns) {
+        // Sorting data by 'jam' DESC
+        $exportedData = $this->data->sortByDesc('jam')->map(function ($row) use ($columns) {
             return collect($columns)->mapWithKeys(function ($column) use ($row) {
                 $columnName = $column->getName();
 
@@ -103,7 +104,7 @@ class AbsenExporter extends Exporter
         $startDateTime = Carbon::parse($startDate)->startOfDay();
         $endDateTime = Carbon::parse($endDate)->endOfDay();
 
-        $data = Attendance::whereBetween('CurrentDateTime', [$startDateTime, $endDateTime])->get();
+        $data = Attendance::whereBetween('jam', [$startDateTime, $endDateTime])->get();
 
         if ($data->isEmpty()) {
             // Menampilkan notifikasi jika tidak ada data

@@ -28,6 +28,8 @@ class Pengganti extends Page implements HasTable
 
     protected static string $view = 'filament.pages.pengganti-hari-libur';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     /**
      * Define the table for this page.
      *
@@ -69,7 +71,7 @@ class Pengganti extends Page implements HasTable
                 ])
                 ->columns([
                     TextColumn::make('PersonnelNo')->label('nik'),
-                    TextColumn::make('CurrentDateTime')->label('Tanggal'),
+                    TextColumn::make('jam')->label('Tanggal'),
                     TextColumn::make('Keterangan')->label('Keterangan'),
                 ])
                 ->actions([
@@ -95,7 +97,7 @@ class Pengganti extends Page implements HasTable
             ])
             ->columns([
                 TextColumn::make('PersonnelNo')->label('nik'),
-                TextColumn::make('CurrentDateTime')->label('Tanggal'),
+                TextColumn::make('jam')->label('Tanggal'),
                 TextColumn::make('Keterangan')->label('Keterangan'),
             ])
             ->actions([
