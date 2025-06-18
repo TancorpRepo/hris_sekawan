@@ -573,8 +573,11 @@ class EmployeeSeeder extends Seeder
             // ["PersonnelNo" => "8097", "Name" => "ANGGI DWI HANDAYANI"],
             // ["PersonnelNo" => "8098", "Name" => "HABAKUK"],
             // ["PersonnelNo" => "8099", "Name" => "SEVI NUR JANNAH"]
-            ["PersonnelNo" => "273", "Name" => "ANDRI YUDHA TIRTAYASA"],
-            ["PersonnelNo" => "347", "Name" => "R. ALIFAN RAHMAT BAYU HARWANTO"],
+            // ["PersonnelNo" => "273", "Name" => "ANDRI YUDHA TIRTAYASA"],
+            // ["PersonnelNo" => "347", "Name" => "R. ALIFAN RAHMAT BAYU HARWANTO"],
+            // ["PersonnelNo" => "9091", "Name" => "DIMAS BUKHIN NUGRAHA"],
+            // ["PersonnelNo" => "9091", "Name" => "A.M. AKBAR"],
+            // ["PersonnelNo" => "70004", "Name" => "BAYU SETIYAWAN"],
             // Tambahkan data lainnya...
         ];
 

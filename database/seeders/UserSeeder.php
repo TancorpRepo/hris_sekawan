@@ -574,8 +574,11 @@ class UserSeeder extends Seeder
             // ["PersonnelNo" => "8097", "name" => "ANGGI DWI HANDAYANI", "password" => "8097"],
             // ["PersonnelNo" => "8098", "name" => "HABAKUK", "password" => "8098"],
             // ["PersonnelNo" => "8099", "name" => "SEVI NUR JANNAH", "password" => "8099"],
-            ["PersonnelNo" => "273", "name" => "ANDRI YUDHA TIRTAYASA", "password" => "273"],
-            ["PersonnelNo" => "347", "name" => "R. ALIFAN RAHMAT BAYU HARWANTO", "password" => "347"],
+            // ["PersonnelNo" => "273", "name" => "ANDRI YUDHA TIRTAYASA", "password" => "273"],
+            // ["PersonnelNo" => "347", "name" => "R. ALIFAN RAHMAT BAYU HARWANTO", "password" => "347"],
+            ["PersonnelNo" => "9091", "name" => "DIMAS BUKHIN NUGRAHA", "password" => "9091"],
+            ["PersonnelNo" => "8008", "name" => "A.M. AKBAR", "password" => "8008"],
+            ["PersonnelNo" => "70004", "name" => "BAYU SETIYAWAN", "password" => "70004"],
             // Tambahkan data lainnya...
         ];
 
