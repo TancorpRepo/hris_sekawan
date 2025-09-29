@@ -579,7 +579,8 @@ class UserSeeder extends Seeder
             // ["PersonnelNo" => "9091", "name" => "DIMAS BUKHIN NUGRAHA", "password" => "9091"],
             // ["PersonnelNo" => "8008", "name" => "A.M. AKBAR", "password" => "8008"],
             // ["PersonnelNo" => "70004", "name" => "BAYU SETIYAWAN", "password" => "70004"],
-            ["PersonnelNo" => "418", "name" => "HERI RAMADHAN RS", "password" => "418"],
+            // ["PersonnelNo" => "418", "name" => "HERI RAMADHAN RS", "password" => "418"],
+            ["PersonnelNo" => "421", "name" => "DYAH AJENG PUSPA YUNITA", "password" => "421"],
             // Tambahkan data lainnya...
         ];
 

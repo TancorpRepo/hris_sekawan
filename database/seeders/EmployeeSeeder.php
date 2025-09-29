@@ -578,7 +578,8 @@ class EmployeeSeeder extends Seeder
             // ["PersonnelNo" => "9091", "Name" => "DIMAS BUKHIN NUGRAHA"],
             // ["PersonnelNo" => "9091", "Name" => "A.M. AKBAR"],
             // ["PersonnelNo" => "70004", "Name" => "BAYU SETIYAWAN"],
-            ["PersonnelNo" => "418", "Name" => "HERI RAMADHAN RS"],
+            // ["PersonnelNo" => "418", "Name" => "HERI RAMADHAN RS"],
+            ["PersonnelNo" => "421", "Name" => "DYAH AJENG PUSPA YUNITA"],
             // Tambahkan data lainnya...
         ];
 
