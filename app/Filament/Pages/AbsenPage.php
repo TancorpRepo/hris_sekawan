@@ -74,7 +74,8 @@ class AbsenPage extends Page implements HasForms
                         'in' => "Masuk",
                         'out' => "Pulang",
                     ])
-                    ->default('in'),
+                    // ->default('in'),
+                    ->default(null),
                 View::make('components.camera-capture'),
             ])
             ->statePath('data');
