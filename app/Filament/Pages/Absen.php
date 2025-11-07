@@ -66,7 +66,7 @@ class Absen extends Page implements HasTable
         $loginAdmin = auth()->user()->is_admin;
 
         // Admin(12345)
-        if ($loginAdmin == '1') {
+        if ($loginAdmin == 1) {
             return $table->query(Attendance::query()->orderBy('jam', 'DESC'))
                 ->headerActions([
                     Action::make('absensi')
