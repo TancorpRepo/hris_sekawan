@@ -111,7 +111,7 @@ class Absen extends Page implements HasTable
                         ->formatStateUsing(fn($state) => match ($state) {
                             '1' => 'Masuk',
                             '2' => 'Pulang',
-                            // default => 'Unknown',
+                            default => 'Absen di mesin',
                         }),
                 ])
                 ->filters([])
