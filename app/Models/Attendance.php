@@ -20,5 +20,8 @@ class Attendance extends Model
         'status', // 1 atau 2. 1 in 2 out
         'f_export', // 2
         'idplant', // 1
+        'Lokasi',
+        'Longitude',
+        'Latitude'
     ];
 }

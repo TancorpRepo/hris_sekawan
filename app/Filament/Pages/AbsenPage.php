@@ -64,8 +64,8 @@ class AbsenPage extends Page implements HasForms
                     ->default($employee?->Name ?? '')
                     ->readOnly(),
 
-                TextInput::make('Latitude')->required()->hidden(),
-                TextInput::make('Longitude')->required()->hidden(),
+                TextInput::make('Latitude')->required(),
+                TextInput::make('Longitude')->required(),
                 DateTimePicker::make('jam')->required()->hidden(),
                 Select::make('status')
                     ->label('Jenis Absensi')
@@ -91,6 +91,34 @@ class AbsenPage extends Page implements HasForms
 
         $this->nikValid = true;
 
+        // $absenData = [
+        //     'tgl_tarik' => now()->format('Y-m-d'),
+        //     'tanggal' => now()->format('Y-m-d'),
+        //     'mesin' => 1,
+        //     'nik' => $loginUser,
+        //     'jam' => now()->format('Y-m-d H:i:s'),
+        //     'status' => $data['status'] === 'in' ? 1 : 2,
+        //     'f_export' => 2,
+        //     'idplant' => 1,
+        // ];
+
+        $latitude = $data['Latitude'];
+        $longitude = $data['Longitude'];
+
+        // Ambil lokasi dari LocationIq
+        $apiKey = env('LOCATIONIQ_API_KEY');
+        $locationName = null;
+
+        try {
+            $response = file_get_contents(
+                "https://us1.locationiq.com/v1/reverse.php?key=$apiKey&lat=$latitude&lon=$longitude&format=json"
+            );
+            $result = json_decode($response, true);
+            $locationName = $result['display_name'] ?? null;
+        } catch (\Exception $e) {
+            $locationName = null; // Jika gagal, tidak masalah
+        }
+
         $absenData = [
             'tgl_tarik' => now()->format('Y-m-d'),
             'tanggal' => now()->format('Y-m-d'),
@@ -100,6 +128,9 @@ class AbsenPage extends Page implements HasForms
             'status' => $data['status'] === 'in' ? 1 : 2,
             'f_export' => 2,
             'idplant' => 1,
+            'Latitude' => $latitude,
+            'Longitude' => $longitude,
+            'Lokasi' => $locationName,
         ];
 
         Attendance::create($absenData);
