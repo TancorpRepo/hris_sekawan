@@ -99,7 +99,7 @@ class Absen extends Page implements HasTable
                 ->columns([
                     TextColumn::make('nik')->label('NIK'),
                     TextColumn::make('jam')->label('Tanggal & Jam'),
-                    TextColumn::make('Lokasi')->label('Lokasi')->limit(40),
+                    TextColumn::make('Lokasi')->label('Lokasi')->wrap(),
                     // TextColumn::make('status')->label('in/out'),
                     TextColumn::make('status')
                         ->label('Masuk/Pulang')
