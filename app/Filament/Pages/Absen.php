@@ -67,7 +67,12 @@ class Absen extends Page implements HasTable
 
         // Admin(12345)
         if ($loginAdmin == 1) {
-            return $table->query(Attendance::where('mesin', 'HP')->query()->orderBy('jam', 'DESC'))
+            // return $table->query(Attendance::where('mesin', 'HP')->query()->orderBy('jam', 'DESC'))
+            return $table->query(
+                Attendance::where('mesin', 'HP')
+                    ->whereIn('status', [1, 2])   // ✔ hanya status 1 & 2
+                    ->orderBy('jam', 'DESC')
+            )
                 ->headerActions([
                     Action::make('absensi')
                         ->label('Absensi')
