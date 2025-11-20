@@ -67,7 +67,7 @@ class Absen extends Page implements HasTable
 
         // Admin(12345)
         if ($loginAdmin == 1) {
-            return $table->query(Attendance::query()->orderBy('jam', 'DESC'))
+            return $table->query(Attendance::where('mesin', 'HP')->query()->orderBy('jam', 'DESC'))
                 ->headerActions([
                     Action::make('absensi')
                         ->label('Absensi')
@@ -127,6 +127,7 @@ class Absen extends Page implements HasTable
                 MIN(CASE WHEN status = 2 THEN TIME(jam) END) as jam_pulang
             ')
                     ->where('nik', $loginUser)
+                    ->where('mesin', 'HP')
                     ->groupByRaw('DATE(jam)')
                     ->orderByRaw('DATE(jam) DESC')
             )

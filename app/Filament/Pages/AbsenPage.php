@@ -122,7 +122,7 @@ class AbsenPage extends Page implements HasForms
         $absenData = [
             'tgl_tarik' => now()->format('Y-m-d'),
             'tanggal' => now()->format('Y-m-d'),
-            'mesin' => 1,
+            'mesin' => 'HP',
             'nik' => $loginUser,
             'jam' => now()->format('Y-m-d H:i:s'),
             'status' => $data['status'] === 'in' ? 1 : 2,
