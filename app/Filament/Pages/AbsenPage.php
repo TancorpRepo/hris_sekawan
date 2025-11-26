@@ -13,6 +13,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Http;
 
 class AbsenPage extends Page implements HasForms
 {
@@ -110,13 +111,16 @@ class AbsenPage extends Page implements HasForms
         $locationName = null;
 
         try {
-            $response = file_get_contents(
-                "https://us1.locationiq.com/v1/reverse.php?key=$apiKey&lat=$latitude&lon=$longitude&format=json"
-            );
-            $result = json_decode($response, true);
-            $locationName = $result['display_name'] ?? null;
+            $response = Http::timeout(10)->get("https://us1.locationiq.com/v1/reverse.php", [
+                'key' => $apiKey,
+                'lat' => $latitude,
+                'lon' => $longitude,
+                'format' => 'json',
+            ]);
+
+            $locationName = $response->json()['display_name'] ?? null;
         } catch (\Exception $e) {
-            $locationName = null; // Jika gagal, tidak masalah
+            $locationName = null;
         }
 
         $absenData = [
