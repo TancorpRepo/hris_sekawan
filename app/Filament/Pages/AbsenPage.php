@@ -111,7 +111,8 @@ class AbsenPage extends Page implements HasForms
         $locationName = null;
 
         try {
-            $response = Http::timeout(10)->get("https://us1.locationiq.com/v1/reverse.php", [
+            // $response = Http::timeout(10)->get("https://us1.locationiq.com/v1/reverse.php", [
+            $response = Http::timeout(10)->get("https://us1.locationiq.com/v1/reverse", [
                 'key' => $apiKey,
                 'lat' => $latitude,
                 'lon' => $longitude,

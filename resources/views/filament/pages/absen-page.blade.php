@@ -43,9 +43,13 @@
         {{ $this->form }}
 
         {{-- Latitude, Longitude, dan jam --}}
-        <input type="hidden" id="data.Latitude" name="Latitude" value="">
+        {{-- <input type="hidden" id="data.Latitude" name="Latitude" value="">
         <input type="hidden" id="data.Longitude" name="Longitude" value="">
-        <input type="hidden" id="data.jam" name="jam" value="">
+        <input type="hidden" id="data.jam" name="jam" value=""> --}}
+
+        <input type="hidden" id="data.Latitude" wire:model="data.Latitude">
+        <input type="hidden" id="data.Longitude" wire:model="data.Longitude">
+        <input type="hidden" id="data.jam" wire:model="data.jam">
 
         {{-- Submit Button --}}
         <x-filament::button type="submit" size="sm" class="my-4" :disabled="!$nikValid">
